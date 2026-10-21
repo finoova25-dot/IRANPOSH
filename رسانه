@@ -1,0 +1,286 @@
+<!doctype html>
+<html lang="fa" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>نوین‌تک | ارزیابی راهبردی رسانه‌ها</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@400;600;800&display=swap" rel="stylesheet">
+<style>
+:root{--p:#4B3475;--d:#2D1F4A;--l:#F4F1F8;--a:#6B4FA3;--w:#FBFAFD;--t:#EAE5F2;--r:#B3261E;--o:#B45309;--g:#157A3E;--m:#5B5470}
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{height:100%}
+body{font-family:'Vazirmatn',Tahoma,sans-serif;background:var(--l);color:var(--d);overflow:hidden;line-height:1.6}
+.slide{position:absolute;inset:0;display:none;flex-direction:column;gap:clamp(12px,2.4vh,26px);padding:clamp(56px,9vh,96px) clamp(16px,6vw,110px) 84px;overflow-y:auto}
+.slide.on{display:flex;animation:in .3s ease-out}
+@keyframes in{from{opacity:0}to{opacity:1}}
+@media (prefers-reduced-motion:reduce){.slide.on{animation:none}}
+.dark{background:var(--d);color:var(--l)}
+.logo{position:fixed;top:clamp(14px,3vh,28px);left:clamp(16px,4vw,56px);display:flex;gap:6px;align-items:center;color:var(--p);z-index:5;transition:color .3s}
+body.isdark .logo{color:var(--l)}
+.logo i{display:block;width:18px;height:18px;border-radius:9px;background:currentColor}
+.logo i:last-child{width:48px}
+h1{font-size:clamp(30px,5.4vw,70px);font-weight:800;line-height:1.25}
+h2{font-size:clamp(24px,3.6vw,46px);font-weight:800;line-height:1.25;color:var(--p)}
+.dark h2{color:var(--l)}
+h3{font-size:clamp(17px,2vw,24px);font-weight:800}
+p,td,th,li{font-size:clamp(14px,1.55vw,20px)}
+.sub{color:#CFC6E3}
+.row{display:flex;gap:16px;flex-wrap:wrap}
+.card{flex:1 1 250px;background:var(--w);border-radius:18px;padding:20px 24px;display:flex;flex-direction:column;gap:8px}
+.dark .card{background:#3F2E63}
+.card.hi{background:var(--a);color:#fff}
+.big{font-size:clamp(28px,4.2vw,56px);font-weight:800;line-height:1.2}
+.tw{overflow-x:auto;border-radius:14px}
+table{width:100%;border-collapse:collapse;background:var(--w)}
+th{background:var(--p);color:#fff;font-weight:600}
+th,td{padding:10px 14px;text-align:right;vertical-align:top}
+tbody tr:nth-child(even){background:var(--t)}
+td.c,th.c{text-align:center}
+tr.sum td{background:#D9CFEA;font-weight:800}
+.ok{color:var(--g);font-weight:800}.mid{color:var(--o);font-weight:800}.no{color:var(--r);font-weight:800}
+.bars{display:flex;flex-direction:column;gap:10px;background:var(--w);border-radius:18px;padding:18px 24px}
+.bar{display:grid;grid-template-columns:minmax(120px,22%) 1fr minmax(90px,16%);gap:12px;align-items:center}
+.bar b{display:block;height:18px;border-radius:9px;background:var(--a);width:var(--v)}
+.bar.hot b{background:var(--r)}
+.note{background:#FEF3C7;color:#7A3E06;border-radius:14px;padding:14px 20px}
+.flag{background:var(--p);color:#fff;border-radius:14px;padding:14px 20px}
+.gates{display:flex;gap:0;flex-wrap:wrap}
+.gate{flex:1 1 220px;padding:18px 22px;background:var(--w);border-top:6px solid var(--a);display:flex;flex-direction:column;gap:6px}
+.gate:nth-child(2){border-color:var(--o)}.gate:nth-child(3){border-color:var(--r)}
+.rules{display:flex;gap:12px;flex-wrap:wrap}
+.rules p{flex:1 1 200px;border-radius:12px;padding:10px 14px;font-weight:600}
+.rules .g{background:#D7EFDF;color:#0F5A2D}.rules .y{background:#FEF3C7;color:#7A3E06}.rules .r{background:#F8D9D6;color:#8A1C16}
+.v{border-radius:18px;background:var(--w);padding:18px 22px;display:flex;flex-direction:column;gap:6px;flex:1 1 360px;border-right:8px solid var(--a)}
+.v.go{border-color:var(--g)}.v.cond{border-color:var(--o)}.v.stop{border-color:var(--r)}
+.src{color:var(--m);font-size:clamp(12px,1.2vw,15px)}
+nav{position:fixed;bottom:0;left:0;right:0;height:64px;display:flex;align-items:center;gap:14px;padding:0 clamp(12px,4vw,56px);background:rgba(244,241,248,.94);border-top:1px solid #D9CFEA;z-index:6}
+body.isdark nav{background:rgba(45,31,74,.94);border-color:#4B3475}
+nav button{font:inherit;font-weight:600;border:0;border-radius:999px;padding:8px 18px;background:var(--p);color:#fff;cursor:pointer}
+nav button:disabled{opacity:.35;cursor:default}
+nav button:focus-visible,.dot:focus-visible{outline:3px solid #E8A33D;outline-offset:2px}
+.dots{display:flex;gap:8px;flex:1;justify-content:center}
+.dot{width:12px;height:12px;border-radius:6px;border:0;background:#B9AED3;cursor:pointer;padding:0}
+.dot.on{width:34px;background:var(--a)}
+.cnt{font-size:15px;color:var(--m);min-width:56px;text-align:center}
+body.isdark .cnt{color:#CFC6E3}
+@media print{body{overflow:visible}.slide{display:flex!important;position:static;page-break-after:always;min-height:100vh}nav,.logo{display:none}}
+</style>
+</head>
+<body>
+<div class="logo" aria-hidden="true"><i></i><i></i><i></i></div>
+
+<main id="deck">
+
+<section class="slide dark on" aria-label="خلاصه اجرایی">
+<p class="sub">گزارش کارشناسی برای مدیرعامل نوین‌تک، بازوی سرمایه‌گذاری خطرپذیر و نوآوری بانک اقتصاد نوین</p>
+<h1>پیشنهادهای رسانه‌ای: کدام را، با چه شرطی؟</h1>
+<p class="sub">ارزیابی کمّی ۴ پیشنهاد دریافتی و ۳ رسانه تکمیلی (راه پرداخت، تکراسا، دنیای اقتصاد) با ۶ معیار وزنی، ۵ شاخص عملکرد و قاعده توقف در روز ۹۰ و ۱۸۰ (۲۸ مهر ۱۴۰۵)</p>
+<div class="row">
+<div class="card hi" style="flex:1.5 1 320px"><p>پیشنهاد</p><p class="big">همکاری مشروط با ۲ رسانه</p><p>عصر بانک با بازبینی فصلی؛ چابک آنلاین با دوره آزمایشی؛ دنیای سرمایه‌گذاری فقط با تغییر موضوع؛ کاما: عدم خرید.</p></div>
+<div class="card"><p class="big">۳٫۶۵ از ۵</p><p class="sub">بالاترین امتیاز وزنی (عصر بانک). آستانه همکاری ۳٫۵</p></div>
+<div class="card"><p class="big">≈ ۳۲۱ میلیون</p><p class="sub">تومان، بودجه سناریوی پیشنهادی. حداکثری: ۴۲۳ تا ۴۵۹ میلیون</p></div>
+</div>
+<p class="sub" style="font-size:14px">امتیازها اولیه‌اند و بر پایه اسناد پیشنهاددهندگان است؛ داده مستقل ترافیک و مخاطب در مذاکره دریافت و جایگزین می‌شود.</p>
+</section>
+
+<section class="slide" aria-label="بودجه و بنچ‌مارک هزینه">
+<h2>بودجه دقیق و بنچ‌مارک هزینه</h2>
+<div class="tw"><table>
+<thead><tr><th>پیشنهاد</th><th>بسته و تعهد</th><th class="c">هزینه (میلیون تومان)</th><th>هزینه واحد</th><th>نکته راستی‌آزمایی</th></tr></thead>
+<tbody>
+<tr><td><b>عصر بانک</b></td><td>برنزی ۱۲ماهه، ۱ مصاحبه متنی در ماه، بازنشر و جایگاه تبلیغ</td><td class="c">≈ ۲۰۶٫۷</td><td>≈ ۱۷٫۲ میلیون در ماه</td><td>مبلغ ماهانه در سند ناخوانا است؛ عدد از جمع سالانه محاسبه شد</td></tr>
+<tr><td><b>چابک آنلاین</b></td><td>اختصاصی ۱۲ماهه، تعداد خروجی تعریف نشده</td><td class="c">۲۰۴ تا ۲۴۰</td><td>۱۷ تا ۲۰ میلیون در ماه</td><td class="no">مغایرت ۳۶ میلیونی: ماهانه ۲۰ × ۱۲ = ۲۴۰، اما جمع سالانه سند ≈ ۲۰۴</td></tr>
+<tr><td><b>دنیای سرمایه‌گذاری</b></td><td>۲ صفحه مصاحبه در پرونده ویژه، یک‌باره</td><td class="c">۱۲</td><td>۶ میلیون به‌ازای هر صفحه</td><td>موضوع پرونده با هویت برند هم‌راستا نیست</td></tr>
+<tr><td><b>کاما</b></td><td>صفحات کتاب ۲۰۰۰ نسخه‌ای هر ۴۵ روز؛ کاماپرس جدا</td><td class="c">۲۸ هر صفحه (تا ۴۸۰)</td><td>۱۴ میلیون به‌ازای هر ۱۰۰۰ نسخه</td><td>تعرفه فقط برای کتاب است؛ خدمات آنلاین کاماپرس قیمت مستقل ندارد و هدیه جایگاه‌های ویژه کتاب است. تخفیف ۲۰٪ (دو شماره) و ۳۵٪ (سه شماره)</td></tr>
+</tbody></table></div>
+<div class="bars" role="img" aria-label="مقایسه هزینه واحد">
+<h3>بنچ‌مارک هزینه واحد (میلیون تومان)</h3>
+<div class="bar hot"><span>کاما، هر صفحه</span><b style="--v:100%"></b><span>۲۸ (۴٫۷ برابر)</span></div>
+<div class="bar hot"><span>کاما با ۳۵٪ تخفیف، هر صفحه</span><b style="--v:65%"></b><span>۱۸٫۲ (۳ برابر)</span></div>
+<div class="bar"><span>چابک، هر ماه</span><b style="--v:71%"></b><span>۱۷ تا ۲۰</span></div>
+<div class="bar"><span>عصر بانک، هر ماه</span><b style="--v:61%"></b><span>≈ ۱۷٫۲</span></div>
+<div class="bar"><span>دنیای سرمایه‌گذاری، هر صفحه</span><b style="--v:21%"></b><span>۶</span></div>
+</div>
+<div class="row"><p class="flag" style="flex:1 1 300px">جمع سه پیشنهاد دارای رقم سالانه: ≈ ۴۲۳ تا ۴۵۹ میلیون تومان</p><p class="note" style="flex:1 1 300px">واحدها یکسان نیستند (صفحه و ماه)؛ مقایسه فقط برای تشخیص گرانی نسبی است.</p></div>
+</section>
+
+<section class="slide" aria-label="ماتریس ارزیابی وزنی">
+<h2>ماتریس ارزیابی وزنی (مقیاس ۱ تا ۵)</h2>
+<div class="tw"><table>
+<thead><tr><th>معیار</th><th class="c">وزن</th><th class="c">عصر بانک</th><th class="c">چابک آنلاین</th><th class="c">دنیای سرمایه‌گذاری</th><th class="c">کاما</th></tr></thead>
+<tbody>
+<tr><td>تناسب با مخاطب هدف (فین‌تک، بانکی، سرمایه‌گذار)</td><td class="c">۲۵٪</td><td class="c">۴</td><td class="c">۳</td><td class="c">۳</td><td class="c">۲</td></tr>
+<tr><td>تناسب با ریبرندینگ نوین‌تک</td><td class="c">۲۰٪</td><td class="c">۵</td><td class="c">۴</td><td class="c">۱</td><td class="c">۲</td></tr>
+<tr><td>اعتبار و استقلال رسانه</td><td class="c">۱۵٪</td><td class="c">۳</td><td class="c">۳</td><td class="c">۳</td><td class="c">۳</td></tr>
+<tr><td>هزینه‌اثربخشی</td><td class="c">۱۵٪</td><td class="c">۳</td><td class="c">۲</td><td class="c">۳</td><td class="c">۱</td></tr>
+<tr><td>قابلیت اندازه‌گیری</td><td class="c">۱۵٪</td><td class="c">۳</td><td class="c">۲</td><td class="c">۲</td><td class="c">۲</td></tr>
+<tr><td>ریسک و شرایط قرارداد</td><td class="c">۱۰٪</td><td class="c">۳</td><td class="c">۲</td><td class="c">۲</td><td class="c">۲</td></tr>
+<tr class="sum"><td>امتیاز وزنی</td><td class="c">۱۰۰٪</td><td class="c">۳٫۶۵</td><td class="c">۲٫۸۰</td><td class="c">۲٫۳۵</td><td class="c">۲٫۰۰</td></tr>
+<tr><td>پیشنهاد</td><td></td><td class="c ok">همکاری</td><td class="c mid">مشروط</td><td class="c no">رد؛ با تغییر موضوع ۲٫۹۵</td><td class="c no">عدم خرید</td></tr>
+</tbody></table></div>
+<p class="src">آستانه‌ها مطابق گزارش اجلاس نشان ملی: ۳٫۵ به بالا همکاری، ۲٫۵ تا ۳٫۵ مشروط، زیر ۲٫۵ رد. امتیاز وزنی = مجموع امتیاز × وزن؛ برای عصر بانک: ۴×۰٫۲۵ + ۵×۰٫۲۰ + ۳×۰٫۱۵ + ۳×۰٫۱۵ + ۳×۰٫۱۵ + ۳×۰٫۱۰ = ۳٫۶۵. اگر موضوع دنیای سرمایه‌گذاری به هوش مصنوعی یا تحول دیجیتال بانکداری تغییر کند، امتیاز ریبرندینگ آن ۴ و مجموع ۲٫۹۵ می‌شود.</p>
+</section>
+
+<section class="slide" aria-label="رسانه‌های تکمیلی">
+<h2>رسانه‌های تکمیلی: داده عمومی و ارزیابی اولیه</h2>
+<div class="tw"><table>
+<thead><tr><th>رسانه</th><th>تأییدشده از منابع عمومی</th><th>ادعای خود رسانه (تأییدنشده)</th><th>قیمت</th><th class="c">امتیاز بدون هزینه</th></tr></thead>
+<tbody>
+<tr><td><b>راه پرداخت</b> (شبکه عصر تراکنش)</td><td>فعال از اردیبهشت ۱۳۹۰ با مجوز وزارت ارشاد؛ خصوصی و مستقل؛ ماهنامه چاپی عصر تراکنش از ۱۳۹۶؛ رویداد فین‌تک ایران؛ کانال تلگرام ≈ ۱۱٫۳ هزار عضو</td><td>پرمخاطب‌ترین رسانه فناوری مالی؛ مخاطب ماهنامه: مدیران و کارشناسان ارشد فین‌تک</td><td>منتشر نشده</td><td class="c ok">۳٫۹۴</td></tr>
+<tr><td><b>تکراسا</b></td><td>سایت انگلیسی ۱۳۹۴ و فارسی ۱۳۹۷؛ تکراسا اینسایت با گزارش ۳۳۴ صفحه‌ای فناوری بازاریابی (۱۰۰ مصاحبه)؛ لینکدین ≈ ۳۵ هزار دنبال‌کننده؛ تیم ۲ تا ۱۰ نفر</td><td>توانمندسازی مدیران و کارآفرینان با رسانه، رویداد و تحقیق بازار</td><td>منتشر نشده</td><td class="c mid">۳٫۵۳</td></tr>
+<tr><td><b>دنیای اقتصاد</b></td><td>روزنامه از آذر ۱۳۸۱؛ تیراژ قدیمی ≈ ۲۹ هزار با ≈ ۵۰٪ برگشتی؛ رپورتاژ یا گزارش عملکرد ≈ ۲۰۱٫۶ میلیون تومان (فهرست نمایندگی ۱۴۰۵)</td><td>۸۶ میلیون مخاطب ماهانه وب، ۲۷۶ هزار تلگرام، ۱ میلیون اینستاگرام</td><td>≈ ۲۰۱٫۶ میلیون برای یک درج</td><td class="c mid">۳٫۱۸ (با هزینه: ۲٫۸۵)</td></tr>
+</tbody></table></div>
+<div class="bars" role="img" aria-label="امتیاز بدون معیار هزینه">
+<h3>مقایسه ۷ رسانه بدون معیار هزینه (از ۵)</h3>
+<div class="bar"><span>راه پرداخت</span><b style="--v:79%"></b><span>۳٫۹۴</span></div>
+<div class="bar"><span>عصر بانک</span><b style="--v:75%"></b><span>۳٫۷۶</span></div>
+<div class="bar"><span>تکراسا</span><b style="--v:71%"></b><span>۳٫۵۳</span></div>
+<div class="bar"><span>دنیای اقتصاد</span><b style="--v:64%"></b><span>۳٫۱۸</span></div>
+<div class="bar"><span>چابک آنلاین</span><b style="--v:59%"></b><span>۲٫۹۴</span></div>
+<div class="bar hot"><span>دنیای سرمایه‌گذاری</span><b style="--v:45%"></b><span>۲٫۲۴</span></div>
+<div class="bar hot"><span>کاما</span><b style="--v:44%"></b><span>۲٫۱۸</span></div>
+</div>
+<p class="note">این سه رسانه هنوز پروپوزال یا داده ترافیک ارسال نکرده‌اند. امتیازها فقط بر پایه ۸۵٪ وزن (بدون هزینه) و داده عمومی است؛ یک درج در دنیای اقتصاد حدود ۶۳٪ بودجه سناریوی متعادل را مصرف می‌کند.</p>
+<p class="src">امتیاز بدون هزینه = مجموع (امتیاز × وزن) ÷ ۰٫۸۵. راه پرداخت: تناسب مخاطب ۴، ریبرندینگ ۵، اعتبار ۴، اندازه‌گیری ۳، ریسک ۳. تکراسا: ۴، ۴، ۳، ۳، ۳. دنیای اقتصاد: ۳، ۳، ۴، ۳، ۳ (هزینه‌اثربخشی ۱).</p>
+</section>
+
+<section class="slide" aria-label="تعرفه کامل کتاب کارنامه بازارها">
+<h2>کاما: تعرفه کامل کتاب «کارنامه بازارها» (بهار ۱۴۰۵)</h2>
+<div class="tw"><table>
+<thead><tr><th>جایگاه</th><th class="c">میلیون تومان (هر صفحه)</th><th>توضیح</th></tr></thead>
+<tbody>
+<tr><td>صفحات داخلی</td><td class="c">۲۸</td><td>پایه مقایسه</td></tr>
+<tr><td>داخلی ممتاز</td><td class="c">۳۵</td><td>ابتدای هر صنعت، حداقل ۲ صفحه</td></tr>
+<tr><td>۸ صفحه آخر</td><td class="c">۶۵</td><td>کاغذ ۱۳۵ گرم</td></tr>
+<tr><td>روبروی پشت جلد</td><td class="c">۸۵</td><td>آخرین صفحه متن</td></tr>
+<tr><td>صفحات ابتدایی (۴ تا ۱۰)</td><td class="c">۹۵</td><td>کاغذ ۱۳۵ گرم</td></tr>
+<tr><td>داخل جلد آخر</td><td class="c">۱۲۰</td><td>مقوا ۲۵۰ گرم</td></tr>
+<tr><td>صفحه ۳</td><td class="c">۲۰۰</td><td>کاغذ ۱۳۵ گرم</td></tr>
+<tr><td>داخل روی جلد</td><td class="c">۲۲۰</td><td>مقوا ۲۵۰ گرم</td></tr>
+<tr><td>پوستر پشت جلد</td><td class="c">۲۱۰</td><td>دو صفحه بزرگ داخل پشت جلد</td></tr>
+<tr><td>پوستر روی جلد</td><td class="c">۲۹۰</td><td>دو صفحه بزرگ داخل روی جلد</td></tr>
+<tr><td>پشت جلد</td><td class="c">۴۸۰</td><td>مقوا ۲۵۰ گرم</td></tr>
+<tr><td>عطف کتاب</td><td class="c">۱۲۰</td><td></td></tr>
+<tr><td>پاکت ارسال برای مدیران</td><td class="c">۱۲۰</td><td>درج تبلیغ روی پاکت برای ۲۰۰۰ مدیر</td></tr>
+</tbody></table></div>
+<div class="row">
+<p class="card">ارزان‌ترین جایگاه: ۲۸ میلیون ÷ ۲۰۰۰ نسخه = ۱۴ هزار تومان به‌ازای هر نسخه</p>
+<p class="card">تخفیف ۲۰٪ در دو شماره پیاپی (۲۲٫۴ میلیون) و ۳۵٪ در سه شماره (۱۸٫۲ میلیون) برای هر صفحه داخلی</p>
+<p class="card">پاکت مدیران: ۱۲۰ میلیون ÷ ۲۰۰۰ = ۶۰ هزار تومان به‌ازای هر مدیر</p>
+<p class="note" style="flex:1 1 250px">این جدول فقط کتاب را قیمت‌گذاری می‌کند. پیشنهاد کاما: عدم خرید.</p>
+</div>
+</section>
+
+<section class="slide" aria-label="شاخص‌ها و قاعده توقف">
+<h2>شاخص‌های عملکرد برای یک صندوق سرمایه‌گذاری خطرپذیر</h2>
+<div class="tw"><table>
+<thead><tr><th>شاخص</th><th>روش اندازه‌گیری</th><th>هدف</th></tr></thead>
+<tbody>
+<tr><td><b>ارجاع مستقیم</b></td><td>بازدید دارای UTM در Google Analytics نوین‌تک، به تفکیک رسانه</td><td>حداقل ۱۵۰ بازدید در ماه تا ماه سوم</td></tr>
+<tr><td><b>سهم مخاطب هدف</b></td><td>درصد مخاطب بانکی، فین‌تک و سرمایه‌گذار طبق آمار مستقل (Similarweb یا گزارش مستند)</td><td>حداقل ۴۰٪ مخاطب رسانه</td></tr>
+<tr><td><b>جستجوی برند</b></td><td>روند جستجوی «نوین‌تک» در Search Console و Google Trends</td><td>رشد حداقل ۱۰٪ تا ماه ششم نسبت به ماه پایه</td></tr>
+<tr><td><b>لید منشأدار</b></td><td>درخواست استارتاپ یا سرمایه‌گذار از فرم ورودی با پرسش «از کجا با ما آشنا شدید؟»</td><td>حداقل ۳ لید معتبر در هر فصل</td></tr>
+<tr><td><b>هزینه به‌ازای هر دستاورد</b></td><td>هزینه ماهانه ÷ (ارجاع + لید)</td><td>حداکثر ۱۲۰ هزار تومان</td></tr>
+</tbody></table></div>
+<div class="gates">
+<div class="gate"><h3>ماه اول</h3><p>ثبت مقدار پایه هر شاخص و نهایی‌کردن اهداف.</p></div>
+<div class="gate"><h3>بازبینی روز ۹۰</h3><p>ارزیابی ۵ شاخص و تصمیم درباره ادامه.</p></div>
+<div class="gate"><h3>بازبینی روز ۱۸۰</h3><p>تصمیم نهایی درباره تمدید ۱۲ماهه.</p></div>
+</div>
+<div class="rules">
+<p class="g">تحقق حداقل ۴ شاخص: تمدید</p>
+<p class="y">تحقق ۲ یا ۳ شاخص: اصلاح و مذاکره مجدد</p>
+<p class="r">کمتر از ۲ شاخص: توقف قرارداد (Kill-Switch)</p>
+</div>
+</section>
+
+<section class="slide" aria-label="پیشنهاد هر رسانه">
+<h2>پیشنهادات برای هر رسانه</h2>
+<div class="row">
+<div class="v go"><h3 class="ok">عصر بانک، ۳٫۶۵: همکاری مشروط</h3><p><b>دلیل:</b> بیشترین تناسب با مخاطب بانکی و فین‌تک و با هویت جدید برند.</p><p><b>نقد:</b> ادعای مخاطب مستند نیست و مبلغ ماهانه ناخوانا است.</p><p><b>شرط:</b> آمار مستقل ترافیک، مقایسه با بسته‌های دیگر، بازبینی فصلی، تقویم محتوای توافق‌شده و برچسب روشن مصاحبه یا رپورتاژ.</p></div>
+<div class="v cond"><h3 class="mid">چابک آنلاین، ۲٫۸۰: دوره آزمایشی ۶ماهه</h3><p><b>دلیل:</b> روایت‌سازی تحلیلی می‌تواند مکمل عصر بانک باشد.</p><p><b>نقد:</b> مغایرت ۳۶ میلیونی، خروجی کمّی تعریف‌نشده و نبود آمار مخاطب.</p><p><b>شرط:</b> تعهد کمّی در قرارداد، پروفایل مخاطب، نقش متمایز از عصر بانک و اصلاح رقم قرارداد.</p></div>
+<div class="v stop"><h3 class="no">دنیای سرمایه‌گذاری، ۲٫۳۵: رد پیشنهاد فعلی</h3><p><b>دلیل:</b> موضوع تسهیلات پسا جنگ با ریبرندینگ هم‌راستا نیست و ذی‌نفع طبیعی آن خود بانک است.</p><p><b>نقد:</b> هزینه کم، ریسک پراکندگی پیام را جبران نمی‌کند.</p><p><b>پیشنهاد متقابل:</b> موضوع هوش مصنوعی یا تحول دیجیتال بانکداری، تأیید متن و هماهنگی با روابط‌عمومی بانک.</p></div>
+<div class="v stop"><h3 class="no">کاما، ۲٫۰۰: عدم خرید</h3><p><b>دلیل:</b> مخاطب، مدیران عمومی بخش خصوصی‌اند، نه سرمایه‌گذار و اکوسیستم فین‌تک.</p><p><b>نقد:</b> صفحه‌ای ۲۸ میلیون؛ حتی با ۳۵٪ تخفیف ۱۸٫۲ میلیون (۳ برابر دنیای سرمایه‌گذاری)، و خدمات آنلاین کاماپرس قیمت مستقل ندارد.</p><p><b>گام:</b> فقط استعلام قیمت مستقل خدمات آنلاین و ترافیک کاماپرس، بدون خرید جایگاه کتاب.</p></div>
+</div>
+</section>
+
+<section class="slide" aria-label="فهرست داده‌های درخواستی">
+<h2>فهرست داده‌های درخواستی از رسانه‌ها</h2>
+<div class="row">
+<div class="card"><h3>از همه رسانه‌ها</h3>
+<p>۱. بازدید ماهانه ۳ ماه اخیر و منبع ترافیک، از ابزار مستقل یا گزارش مستند</p>
+<p>۲. ترکیب مخاطب: درصد بانکی، فین‌تک و سرمایه‌گذار</p>
+<p>۳. نرخ تعامل کانال‌ها و نمونه خروجی برای ۲ مشتری مشابه</p>
+<p>۴. قیمت پایه، بسته‌ها، تخفیف و جزئیات هر خروجی</p>
+<p>۵. شرایط لغو و انتقال خدمات، و برچسب محتوا (مصاحبه یا رپورتاژ)</p></div>
+<div class="card"><h3>راه پرداخت</h3>
+<p>تعرفه سایت، ماهنامه عصر تراکنش و رویداد فین‌تک ایران؛ تیراژ و نحوه توزیع ماهنامه؛ آمار کانال‌های شبکه.</p>
+<h3>تکراسا</h3>
+<p>تعرفه حمایت از گزارش‌های تکراسا اینسایت و حضور در رویدادها؛ ترکیب مخاطب استارتاپی و سرمایه‌گذار.</p>
+<h3>دنیای اقتصاد</h3>
+<p>تعرفه صفحه ویژه یا گفت‌وگو در بخش فناوری؛ آمار مستقل وب؛ تیراژ و فروش واقعی امروز.</p></div>
+</div>
+<p class="flag">مهلت پیشنهادی: ۷ روز. پس از دریافت، امتیاز نهایی با معیار هزینه محاسبه و جایگزینی احتمالی چابک آنلاین بررسی می‌شود.</p>
+</section>
+
+<section class="slide dark" aria-label="سناریوها و تصمیم">
+<h2>سناریوهای بودجه و تصمیم موردنیاز</h2>
+<div class="row">
+<div class="card"><p class="sub">حداقلی</p><p class="big">≈ ۶۳٫۷ میلیون</p><p>عصر بانک ۳ماهه آزمایشی (≈ ۵۱٫۷) و دنیای سرمایه‌گذاری با تغییر موضوع (۱۲)</p></div>
+<div class="card hi" style="flex:1.3 1 280px"><p>متعادل و پیشنهادی</p><p class="big">≈ ۳۲۱ میلیون</p><p>عصر بانک ۱۲ماهه با بازبینی فصلی (≈ ۲۰۶٫۷)، چابک ۶ماهه آزمایشی (≈ ۱۰۲) و دنیای سرمایه‌گذاری مشروط (۱۲)</p></div>
+<div class="card"><p class="sub">حداکثری و پرریسک</p><p class="big">۴۲۳ تا ۴۵۹ میلیون</p><p>هر دو همکاری ۱۲ماهه کامل و دنیای سرمایه‌گذاری، بدون دوره آزمایشی</p></div>
+</div>
+<div class="card" style="background:var(--l);color:var(--d)"><h3 style="color:var(--p)">چهار تصمیم موردنیاز از مدیرعامل</h3>
+<p>۱. تأیید سناریوی متعادل و سقف بودجه حدود ۳۲۱ میلیون تومان.</p>
+<p>۲. اجازه مذاکره درباره دوره آزمایشی، بند خروج و شاخص‌ها با عصر بانک و چابک آنلاین.</p>
+<p>۳. تأیید رد پیشنهاد فعلی دنیای سرمایه‌گذاری و عدم خرید جایگاه در کتاب کاما.</p>
+<p>۴. ارسال درخواست داده و پروپوزال به راه پرداخت، تکراسا و دنیای اقتصاد با مهلت ۷ روز؛ ممکن است سهم چابک آنلاین در سناریوی متعادل به یکی از آن‌ها برسد.</p></div>
+<p class="sub" style="font-size:14px">همه ارقام از اسناد پیشنهاددهندگان است و پیش از امضا با پروپوزال اصلی تطبیق داده می‌شود.</p>
+</section>
+
+</main>
+
+<nav aria-label="ناوبری اسلایدها">
+<button id="prev" type="button">قبلی</button>
+<div class="dots" id="dots"></div>
+<span class="cnt" id="cnt"></span>
+<button id="next" type="button">بعدی</button>
+</nav>
+
+<script>
+(function(){
+  var s=[].slice.call(document.querySelectorAll('.slide')),i=0,
+      dots=document.getElementById('dots'),cnt=document.getElementById('cnt'),
+      pv=document.getElementById('prev'),nx=document.getElementById('next');
+  var fa=function(n){return String(n).replace(/\d/g,function(d){return '۰۱۲۳۴۵۶۷۸۹'[d]})};
+  s.forEach(function(el,k){var b=document.createElement('button');b.className='dot';b.type='button';
+    b.setAttribute('aria-label','اسلاید '+fa(k+1));b.onclick=function(){go(k)};dots.appendChild(b)});
+  function go(n){
+    i=Math.max(0,Math.min(s.length-1,n));
+    s.forEach(function(el,k){el.classList.toggle('on',k===i)});
+    [].forEach.call(dots.children,function(d,k){d.classList.toggle('on',k===i)});
+    cnt.textContent=fa(i+1)+' از '+fa(s.length);
+    pv.disabled=i===0;nx.disabled=i===s.length-1;
+    document.body.classList.toggle('isdark',s[i].classList.contains('dark'));
+    s[i].scrollTop=0;
+    try{history.replaceState(null,'','#'+(i+1))}catch(e){}
+  }
+  pv.onclick=function(){go(i-1)};nx.onclick=function(){go(i+1)};
+  document.addEventListener('keydown',function(e){
+    var k=e.key;
+    if(k==='ArrowLeft'||k==='PageDown'||k===' '){e.preventDefault();go(i+1)}
+    else if(k==='ArrowRight'||k==='PageUp'){e.preventDefault();go(i-1)}
+    else if(k==='Home'){go(0)}else if(k==='End'){go(s.length-1)}
+  });
+  var x0=null;
+  document.addEventListener('touchstart',function(e){x0=e.touches[0].clientX},{passive:true});
+  document.addEventListener('touchend',function(e){
+    if(x0===null)return;var dx=e.changedTouches[0].clientX-x0;x0=null;
+    if(Math.abs(dx)>70){go(dx<0?i+1:i-1)}
+  });
+  var h=parseInt(location.hash.slice(1),10);go(h>0?h-1:0);
+})();
+</script>
+</body>
+</html>
